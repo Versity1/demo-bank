@@ -4,9 +4,13 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 def login_view(request):
+    if request.htmx:
+        return render(request, 'partials/auth_login.html')
     return render(request, 'login.html')
 
 def register_view(request):
+    if request.htmx:
+        return render(request, 'partials/auth_register.html')
     return render(request, 'register.html')
 
 def account_detail(request):
