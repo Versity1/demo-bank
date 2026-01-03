@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transfer Funds - NeoBank</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1a2436",
+                        "surface-light": "#ffffff",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-white transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<!-- Side Navigation -->
+<aside class="hidden w-64 flex-col border-r border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-[#111722] lg:flex">
+<div class="flex h-16 items-center px-6 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined !text-[32px]">savings</span>
+<h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">NeoBank</h1>
+</div>
+</div>
+<div class="flex flex-1 flex-col justify-between overflow-y-auto px-4 py-6">
+<nav class="space-y-1">
+<div class="mb-6 px-2">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Personal Banking</p>
+</div>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-surface-dark dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Overview
+                    </a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-surface-dark dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+                        My Accounts
+                    </a>
+<a class="group flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-sm font-medium text-primary dark:bg-primary dark:text-white" href="#">
+<span class="material-symbols-outlined">swap_horiz</span>
+                        Transfers
+                    </a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-surface-dark dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                        Statements
+                    </a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-surface-dark dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">credit_card</span>
+                        Cards
+                    </a>
+</nav>
+<div class="space-y-1 border-t border-gray-200 dark:border-gray-800 pt-6">
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-surface-dark dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-surface-dark dark:hover:text-white" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Help &amp; Support
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<div class="flex flex-1 flex-col overflow-hidden">
+<!-- Top Header -->
+<header class="flex h-16 items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-surface-light dark:bg-[#111722] px-6 lg:px-8">
+<div class="flex flex-1 items-center gap-4">
+<div class="relative w-full max-w-md">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-gray-400">search</span>
+</div>
+<input class="block w-full rounded-lg border-0 bg-gray-100 dark:bg-[#232f48] py-2 pl-10 pr-3 text-sm text-gray-900 dark:text-white placeholder:text-gray-500 focus:ring-2 focus:ring-primary sm:leading-6" placeholder="Search transactions, accounts..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative rounded-full bg-gray-100 dark:bg-[#232f48] p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-[#111722]"></span>
+</button>
+<div class="h-8 w-8 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700" data-alt="User profile picture placeholder">
+<img alt="User Avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRVuX9u-o_2_UT8NgwE6DKqXdafhFvZZ4bVcOlOLwuJyOZQfCxtzi3F0jy2HcjxOmDoRx0ClgHgYPexMApzMb9XIjT8hZI2KhXssieUuLe8vC7OcZwpMKmcZWBAwXBqRicW72i-HVpxRV6TgFywUB9OoKfIgsRmK7NJG9nd_-RLaP3R0tHaOwH7CV9m4zrZ2KZWOBlRw2FfIeQUIFbagI28pmzz-qIK13J8Q4nSD4PnGTjCop2oB-4gAe5BIZ812-zBJWNge9MYhU_"/>
+</div>
+</div>
+</header>
+<!-- Main Scroll Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10">
+<div class="mx-auto max-w-6xl space-y-8">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Transfer Funds</h1>
+<p class="text-base text-gray-500 dark:text-gray-400">Send money securely to internal accounts or external beneficiaries.</p>
+</div>
+<!-- Progress Bar -->
+<div class="w-full max-w-3xl">
+<div class="flex items-center justify-between mb-2">
+<p class="text-sm font-medium text-primary">Step 1 of 3</p>
+<p class="text-sm text-gray-500 dark:text-gray-400">Next: Review</p>
+</div>
+<div class="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+<div class="h-2 w-1/3 rounded-full bg-primary transition-all duration-300"></div>
+</div>
+<p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Enter transfer details below</p>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+<!-- Main Form Area -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Tabs -->
+<div class="border-b border-gray-200 dark:border-gray-700">
+<nav aria-label="Tabs" class="-mb-px flex space-x-8">
+<a class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium" href="#">
+                                        Internal Transfer
+                                    </a>
+<a aria-current="page" class="border-primary text-primary dark:text-white whitespace-nowrap border-b-2 py-4 px-1 text-sm font-bold" href="#">
+                                        External Transfer
+                                    </a>
+</nav>
+</div>
+<!-- Form Content -->
+<div class="bg-white dark:bg-[#1a2436] rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 space-y-8">
+<!-- Source Account Selector -->
+<div class="space-y-4">
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">From Account</label>
+<div class="relative">
+<button class="relative w-full cursor-default rounded-lg bg-white dark:bg-[#232f48] py-3 pl-3 pr-10 text-left border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6 shadow-sm" type="button">
+<span class="flex items-center">
+<div class="flex h-8 w-12 items-center justify-center rounded bg-blue-100 dark:bg-blue-900/30 text-primary mr-3">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<span class="flex flex-col">
+<span class="block truncate font-semibold text-gray-900 dark:text-white">Primary Checking (...4582)</span>
+<span class="block truncate text-xs text-gray-500 dark:text-gray-400">Available Balance: $12,450.00</span>
+</span>
+</span>
+<span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+<span class="material-symbols-outlined text-gray-400">expand_more</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Beneficiary Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Send To</label>
+<button class="text-sm font-semibold text-primary hover:text-blue-400">+ Add New</button>
+</div>
+<!-- Saved Beneficiaries Quick Select -->
+<div class="flex gap-4 overflow-x-auto pb-2 no-scrollbar">
+<div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[70px]">
+<div class="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center border-2 border-primary group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<span class="text-xs font-medium text-gray-600 dark:text-gray-300">New</span>
+</div>
+<div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[70px]">
+<div class="h-14 w-14 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center border-2 border-transparent group-hover:border-primary transition-all overflow-hidden" data-alt="Avatar of Sarah Jenkins">
+<img class="h-full w-full object-cover opacity-80 group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV6y3eQxg7fTbdhGWoBU8gHskXWgMhDG7gnidVKS830hKHMA27rPeWPrXZc0i02CuvUTp-UGRF1sipubITu3zuMfGalk9ng15HMPqi7FZVt1VgAuMVRWPoQXIOqofflkjFWRzC0w6lWEu9nXKV3DZGEyTWT2hlbghfFBzamqNk93wNoJ61gkZdlcWF_YFtpASI8tjHLSE6rxGWZddi0VDFO74gEvC9jV4-KX8GHB-MD50xvw3mI50D6xLPtuGeaK2a2XpXyKuKUUDV"/>
+</div>
+<span class="text-xs font-medium text-gray-600 dark:text-gray-300">Sarah J.</span>
+</div>
+<div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[70px]">
+<div class="h-14 w-14 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center border-2 border-transparent group-hover:border-primary transition-all text-indigo-600 dark:text-indigo-400 font-bold">
+                                                MK
+                                            </div>
+<span class="text-xs font-medium text-gray-600 dark:text-gray-300">Mike K.</span>
+</div>
+<div class="flex flex-col items-center gap-2 cursor-pointer group min-w-[70px]">
+<div class="h-14 w-14 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center border-2 border-transparent group-hover:border-primary transition-all text-emerald-600 dark:text-emerald-400 font-bold">
+                                                AZ
+                                            </div>
+<span class="text-xs font-medium text-gray-600 dark:text-gray-300">Amazon</span>
+</div>
+</div>
+<!-- Recipient Fields -->
+<div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+<div class="sm:col-span-2">
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white" for="recipient-name">Recipient Name</label>
+<div class="mt-2">
+<input class="block w-full rounded-lg border-0 bg-gray-50 dark:bg-[#232f48] py-2.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="recipient-name" name="recipient-name" placeholder="Full Legal Name" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white" for="account-number">Account Number / IBAN</label>
+<div class="mt-2 relative">
+<input class="block w-full rounded-lg border-0 bg-gray-50 dark:bg-[#232f48] py-2.5 pr-10 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="account-number" name="account-number" placeholder="0000 0000 0000" type="text"/>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+<span class="material-symbols-outlined text-gray-400 text-sm">lock</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white" for="routing-number">Routing / SWIFT Code</label>
+<div class="mt-2">
+<input class="block w-full rounded-lg border-0 bg-gray-50 dark:bg-[#232f48] py-2.5 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="routing-number" name="routing-number" placeholder="ABCDUS33" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Amount & Date -->
+<div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+<div class="sm:col-span-1">
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white" for="amount">Amount</label>
+<div class="relative mt-2 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="text-gray-500 sm:text-lg">$</span>
+</div>
+<input class="block w-full rounded-lg border-0 bg-gray-50 dark:bg-[#232f48] py-3 pl-8 pr-12 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary text-xl font-bold tracking-tight" id="amount" name="amount" placeholder="0.00" type="text"/>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+<span class="text-gray-500 sm:text-sm">USD</span>
+</div>
+</div>
+</div>
+<div class="sm:col-span-1">
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white" for="date">Date</label>
+<div class="relative mt-2 rounded-md shadow-sm">
+<input class="block w-full rounded-lg border-0 bg-gray-50 dark:bg-[#232f48] py-3 px-4 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 font-medium" id="date" name="date" type="date"/>
+</div>
+</div>
+<div class="sm:col-span-2">
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-white" for="note">Note (Optional)</label>
+<div class="mt-2">
+<textarea class="block w-full rounded-lg border-0 bg-gray-50 dark:bg-[#232f48] py-2 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="note" name="note" placeholder="Rent, Dinner, Invoice #1024..." rows="2"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-4 pt-4">
+<button class="rounded-lg px-6 py-3 text-sm font-semibold text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" type="button">Cancel</button>
+<button class="rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors flex items-center gap-2" type="button">
+                                    Review Transfer
+                                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Summary Sidebar -->
+<div class="lg:col-span-4">
+<div class="bg-white dark:bg-[#1a2436] rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 sticky top-6">
+<div class="p-6 border-b border-gray-200 dark:border-gray-800">
+<h3 class="text-base font-bold leading-6 text-gray-900 dark:text-white">Transaction Summary</h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Transfer Type</span>
+<span class="font-medium text-gray-900 dark:text-white">External (ACH)</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Fee</span>
+<span class="font-medium text-green-500">Free</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-gray-500 dark:text-gray-400">Estimated Arrival</span>
+<span class="font-medium text-gray-900 dark:text-white">Tomorrow, 10:00 AM</span>
+</div>
+<div class="border-t border-dashed border-gray-300 dark:border-gray-700 pt-4">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Debit</span>
+<span class="text-2xl font-bold text-gray-900 dark:text-white">$0.00</span>
+</div>
+</div>
+</div>
+<div class="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-b-xl border-t border-blue-100 dark:border-blue-900/20">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5">security</span>
+<p class="text-xs text-blue-700 dark:text-blue-200 leading-relaxed">
+                                            Your transfer is protected by 256-bit encryption. Fraud monitoring is active for this transaction.
+                                        </p>
+</div>
+</div>
+</div>
+<!-- Ad / Promo -->
+<div class="mt-6 rounded-xl overflow-hidden relative group h-40" data-alt="Abstract gradient background promoting credit card upgrade">
+<div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-primary"></div>
+<div class="relative p-6 flex flex-col justify-between h-full">
+<div>
+<h4 class="text-white font-bold text-lg">Go Premium</h4>
+<p class="text-white/80 text-xs mt-1">Get unlimited free wire transfers with Premium.</p>
+</div>
+<button class="text-xs bg-white text-primary font-bold py-2 px-3 rounded w-fit hover:bg-gray-100 transition-colors">Upgrade Now</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
