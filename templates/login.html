@@ -1,0 +1,98 @@
+{% extends 'auth.html' %}
+
+{% block auth_title %}Demo Bank - Login{% endblock %}
+
+{% block auth_visual_bg %}
+<div class="w-full h-full bg-center bg-cover opacity-60 mix-blend-overlay" data-alt="Abstract blue digital security waves" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJZZbFUbWUjfWz5pCuGvHqqY7P3KiQK13DzyXpXDyegyK1NJUj8BJsGYLFJRrfjAHw1iVfJXqCRFZNBrUFtlApwRb_JOLamlZa4gwIZxcW8MbKDgy_ScBBRt83wdmCMTWP9i7qvug_9JWuDEm9jWuQdkRrPxLVkZkjwyT_T7IVsFx7rr0eujVYLqII42ue-VdhlzBr6a3g7k7XUpaYc9rgxXDPJyQfp8_dik0iOtLYdzOThPOVHyOOvILiI7o2EAVlYJzBOgN45ck_");'></div>
+{% endblock %}
+
+{% block auth_visual_content %}
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider mb-6">
+    <span class="w-2 h-2 rounded-full bg-green-400"></span> Secure Banking
+</div>
+<h1 class="text-4xl font-extrabold text-white leading-tight mb-4">Manage your wealth with confidence.</h1>
+<p class="text-blue-100 text-lg opacity-90">Experience seamless banking with state-of-the-art security and intuitive financial tools.</p>
+{% endblock %}
+
+{% block auth_form %}
+<div class="mb-8">
+    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">Welcome back</h2>
+    <p class="text-slate-500 dark:text-text-secondary">Please enter your details to access your account.</p>
+</div>
+<!-- Tabs -->
+<div class="mb-8">
+    <div class="flex border-b border-slate-200 dark:border-surface-border">
+        <button class="flex-1 pb-3 text-sm font-bold border-b-[3px] border-primary text-primary transition-colors">
+            Login
+        </button>
+        <a href="{% url 'register' %}" class="flex-1 pb-3 text-sm font-bold border-b-[3px] border-transparent text-slate-400 dark:text-text-secondary hover:text-slate-600 dark:hover:text-white transition-colors text-center">
+            Sign Up
+        </a>
+    </div>
+</div>
+<form class="flex flex-col gap-5">
+    <!-- Email Input -->
+    <div class="flex flex-col gap-1.5">
+        <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="email">Email Address</label>
+        <div class="relative group">
+            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[20px]">mail</span>
+            </div>
+            <input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border rounded-lg pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm" id="email" placeholder="name@example.com" type="email"/>
+        </div>
+    </div>
+    <!-- Password Input -->
+    <div class="flex flex-col gap-1.5">
+        <div class="flex justify-between items-center">
+            <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="password">Password</label>
+            <a class="text-xs font-semibold text-primary hover:text-primary-hover hover:underline" href="#">Forgot Password?</a>
+        </div>
+        <div class="relative group">
+            <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">
+                <span class="material-symbols-outlined text-[20px]">lock</span>
+            </div>
+            <input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border rounded-lg pl-10 pr-10 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all shadow-sm" id="password" placeholder="Enter your password" type="password"/>
+            <button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors" type="button">
+                <span class="material-symbols-outlined text-[20px]">visibility</span>
+            </button>
+        </div>
+    </div>
+    <!-- Submit Button -->
+    <button class="mt-2 w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 transform active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-2" type="submit">
+        <span>Sign In</span>
+        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+    </button>
+</form>
+<!-- Divider -->
+<div class="relative my-8">
+    <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-slate-200 dark:border-surface-border"></div>
+    </div>
+    <div class="relative flex justify-center text-xs uppercase">
+        <span class="bg-white dark:bg-surface-dark px-2 text-slate-400 font-semibold tracking-wider">Or continue with</span>
+    </div>
+</div>
+<!-- Social Login -->
+<div class="grid grid-cols-2 gap-4">
+    <button class="flex items-center justify-center gap-2 bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-700 dark:text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+        </svg>
+        <span class="text-sm">Google</span>
+    </button>
+    <button class="flex items-center justify-center gap-2 bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-surface-border hover:bg-slate-100 dark:hover:bg-[#232f48] text-slate-700 dark:text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
+        <svg class="w-5 h-5 text-slate-900 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.35-1.09-.56-2.09-.48-3.08.05-1.04.53-2.19.23-3.11-.75-1.28-1.35-2.24-3.51-1.12-6.14 1.12-2.63 3.35-2.86 4.41-2.26 1.07.61 2.04.53 2.94-.05 1.08-.69 2.76-.73 3.98.63 1.14 1.28 1.54 2.85.76 4.48-.8 1.68-1.46 3.19-2.7 3.69zm-4.14-16c-.22 1.62-1.7 3.34-3.46 3.05-.33-1.85 1.26-3.8 3.46-3.05z"></path>
+        </svg>
+        <span class="text-sm">Apple</span>
+    </button>
+</div>
+<p class="mt-8 text-center text-xs text-slate-400 dark:text-slate-500">
+    Protected by reCAPTCHA and subject to the Google 
+    <a class="underline hover:text-slate-600 dark:hover:text-slate-300" href="#">Privacy Policy</a> and 
+    <a class="underline hover:text-slate-600 dark:hover:text-slate-300" href="#">Terms of Service</a>.
+</p>
+{% endblock %}

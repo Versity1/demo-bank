@@ -1,319 +1,243 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Deposit &amp; Withdraw - Demo Bank</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#135bec",
-                        "background-light": "#f6f6f8",
-                        "background-dark": "#101622",
-                    },
-                    fontFamily: {
-                        "display": ["Manrope", "sans-serif"],
-                        "body": ["Noto Sans", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-                },
-            },
-        }
-    </script>
-<style>
-        /* Custom scrollbar for webkit to match dark theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111722; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #232f48; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #324467; 
-        }
-    </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased">
-<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root">
-<!-- TopNavBar -->
-<div class="w-full border-b border-solid border-b-[#232f48] bg-[#111722]">
-<div class="layout-container flex h-full grow flex-col">
-<header class="flex items-center justify-between whitespace-nowrap px-4 md:px-10 py-3">
-<div class="flex items-center gap-4 md:gap-8">
-<div class="flex items-center gap-4 text-white">
-<div class="size-8 text-primary">
-<!-- Replaced raw SVG with Logo-like icon using Material Symbols as requested not appropriate for logo, keeping SVG for logo integrity but styled text -->
-<svg class="w-8 h-8 text-primary" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
-</svg>
-</div>
-<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] hidden md:block">Demo Bank</h2>
-</div>
-<div class="hidden md:flex items-center gap-9">
-<a class="text-[#92a4c9] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
-<a class="text-[#92a4c9] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Accounts</a>
-<a class="text-white text-sm font-medium leading-normal" href="#">Transfers</a>
-<a class="text-[#92a4c9] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Investments</a>
-</div>
-</div>
-<div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
-<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
-<div class="text-[#92a4c9] flex border-none bg-[#232f48] items-center justify-center pl-4 rounded-l-lg border-r-0">
-<span class="material-symbols-outlined text-[20px]">search</span>
-</div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#232f48] focus:border-none h-full placeholder:text-[#92a4c9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search transactions..." value=""/>
-</div>
-</label>
-<button class="flex items-center justify-center text-[#92a4c9] hover:text-white">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[#232f48]" data-alt="User profile picture showing a smiling person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiSuWx58_WAECVihrxyP36_uiESLc9RuYf3hNUi3_THV_MNiWg_lZ0nR3qLXJ61niupQ_NkirhA-tAFBG31aiZF79n0WDq3ifd5jjpgMCOZPPzF7mePnR6yzzn9CqkWivL36hQ8aU_jo0MM_6AR-6mthKUE1yoRMWYA705pQeUK6kaDheCQjYPhMKz3pf6r0FN-sbXPq9vYjtndPH8-bQpNZ6VJTmY3ge9N1ECayczLvN5hssjscx-ZLVlFA3gQskzk1HaaPGtE_V0");'></div>
-</div>
-</header>
-</div>
-</div>
-<!-- Main Content -->
-<main class="layout-container flex grow flex-col w-full max-w-[1200px] mx-auto px-4 md:px-10 py-8">
-<!-- Page Heading -->
-<div class="flex flex-wrap justify-between gap-3 pb-6">
-<div class="flex min-w-72 flex-col gap-2">
-<p class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Deposit &amp; Withdraw</p>
-<p class="text-[#92a4c9] text-base font-normal leading-normal">Securely manage your funds with multiple payment options.</p>
-</div>
-</div>
-<!-- Stats -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-<div class="flex flex-col gap-2 rounded-xl p-6 bg-[#232f48] border border-[#324467]/30">
-<div class="flex justify-between items-start">
-<p class="text-[#92a4c9] text-sm font-medium leading-normal">Total Balance</p>
-<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
-</div>
-<p class="text-white tracking-light text-2xl font-bold leading-tight">$12,450.00</p>
-</div>
-<div class="flex flex-col gap-2 rounded-xl p-6 bg-[#232f48] border border-[#324467]/30">
-<div class="flex justify-between items-start">
-<p class="text-[#92a4c9] text-sm font-medium leading-normal">Daily Limit</p>
-<span class="material-symbols-outlined text-[#92a4c9]">timelapse</span>
-</div>
-<p class="text-white tracking-light text-2xl font-bold leading-tight">$5,000.00</p>
-<div class="w-full bg-[#111722] rounded-full h-1.5 mt-1">
-<div class="bg-green-500 h-1.5 rounded-full" style="width: 45%"></div>
-</div>
-</div>
-<div class="flex flex-col gap-2 rounded-xl p-6 bg-[#232f48] border border-[#324467]/30">
-<div class="flex justify-between items-start">
-<p class="text-[#92a4c9] text-sm font-medium leading-normal">Available for Withdrawal</p>
-<span class="material-symbols-outlined text-[#92a4c9]">check_circle</span>
-</div>
-<p class="text-white tracking-light text-2xl font-bold leading-tight">$11,900.00</p>
-</div>
-</div>
-<!-- Split View: Form + Sidebar -->
-<div class="flex flex-col lg:flex-row gap-8">
-<!-- Left Column: Transaction Form -->
-<div class="flex-1 flex flex-col gap-6">
-<!-- Tabs -->
-<div class="border-b border-[#324467]">
-<div class="flex gap-8">
-<a class="group flex items-center gap-2 border-b-[3px] border-b-primary pb-4 px-2 cursor-pointer" href="#">
-<span class="material-symbols-outlined text-primary group-hover:text-blue-400">add_card</span>
-<p class="text-white text-sm font-bold leading-normal tracking-[0.015em]">Deposit Funds</p>
-</a>
-<a class="group flex items-center gap-2 border-b-[3px] border-b-transparent hover:border-b-[#324467] pb-4 px-2 cursor-pointer transition-colors" href="#">
-<span class="material-symbols-outlined text-[#92a4c9] group-hover:text-white">credit_card_off</span>
-<p class="text-[#92a4c9] group-hover:text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors">Withdraw Funds</p>
-</a>
-</div>
-</div>
-<!-- Method Selection -->
-<div class="flex flex-col gap-4">
-<h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">1. Select Method</h3>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<!-- Method 1: Card (Selected) -->
-<div class="relative cursor-pointer group rounded-xl bg-[#232f48] p-4 border-2 border-primary transition-all hover:bg-[#2a3855]">
-<div class="absolute top-2 right-2 text-primary">
-<span class="material-symbols-outlined text-[20px]">check_circle</span>
-</div>
-<div class="flex flex-col items-center gap-3 py-2">
-<div class="p-3 rounded-full bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">credit_card</span>
-</div>
-<span class="text-white text-sm font-medium">Credit Card</span>
-</div>
-</div>
-<!-- Method 2: Bank Transfer -->
-<div class="cursor-pointer group rounded-xl bg-[#232f48] p-4 border-2 border-transparent hover:border-[#324467] transition-all hover:bg-[#2a3855]">
-<div class="flex flex-col items-center gap-3 py-2">
-<div class="p-3 rounded-full bg-[#111722] text-[#92a4c9] group-hover:bg-primary/20 group-hover:text-primary transition-colors">
-<span class="material-symbols-outlined">account_balance</span>
-</div>
-<span class="text-[#92a4c9] group-hover:text-white text-sm font-medium transition-colors">Bank Transfer</span>
-</div>
-</div>
-<!-- Method 3: Mobile Money -->
-<div class="cursor-pointer group rounded-xl bg-[#232f48] p-4 border-2 border-transparent hover:border-[#324467] transition-all hover:bg-[#2a3855]">
-<div class="flex flex-col items-center gap-3 py-2">
-<div class="p-3 rounded-full bg-[#111722] text-[#92a4c9] group-hover:bg-primary/20 group-hover:text-primary transition-colors">
-<span class="material-symbols-outlined">smartphone</span>
-</div>
-<span class="text-[#92a4c9] group-hover:text-white text-sm font-medium transition-colors">Mobile Money</span>
-</div>
-</div>
-<!-- Method 4: Crypto -->
-<div class="cursor-pointer group rounded-xl bg-[#232f48] p-4 border-2 border-transparent hover:border-[#324467] transition-all hover:bg-[#2a3855]">
-<div class="flex flex-col items-center gap-3 py-2">
-<div class="p-3 rounded-full bg-[#111722] text-[#92a4c9] group-hover:bg-primary/20 group-hover:text-primary transition-colors">
-<span class="material-symbols-outlined">currency_bitcoin</span>
-</div>
-<span class="text-[#92a4c9] group-hover:text-white text-sm font-medium transition-colors">Crypto</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Amount Input -->
-<div class="flex flex-col gap-4">
-<h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">2. Enter Amount</h3>
-<div class="flex flex-col gap-2">
-<div class="relative flex items-center w-full">
-<span class="absolute left-4 text-[#92a4c9] text-lg font-medium">$</span>
-<input class="w-full bg-[#232f48] border-none text-white text-3xl font-bold placeholder:text-[#324467] rounded-xl py-6 pl-10 pr-24 focus:ring-2 focus:ring-primary focus:outline-none" placeholder="0.00" type="number" value="1250.00"/>
-<div class="absolute right-4 flex items-center">
-<button class="text-xs font-bold text-primary bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded uppercase tracking-wider transition-colors">Max</button>
-<div class="h-6 w-[1px] bg-[#324467] mx-3"></div>
-<span class="text-[#92a4c9] text-sm font-medium">USD</span>
-</div>
-</div>
-<div class="flex justify-between px-2">
-<p class="text-[#92a4c9] text-xs">Transaction Fee: <span class="text-white">$2.50</span></p>
-<p class="text-[#92a4c9] text-xs">Exchange Rate: <span class="text-white">1 USD = 1.00 USD</span></p>
-</div>
-</div>
-</div>
-<!-- Payment Details (Dynamic Section) -->
-<div class="flex flex-col gap-4">
-<h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">3. Card Details</h3>
-<div class="flex flex-col gap-4 p-4 rounded-xl bg-[#232f48] border border-[#324467]/30">
-<div class="flex gap-4">
-<div class="flex-1">
-<label class="text-xs font-medium text-[#92a4c9] mb-1.5 block">Card Number</label>
-<div class="flex items-center gap-2 bg-[#111722] rounded-lg px-3 py-2.5">
-<span class="material-symbols-outlined text-[#92a4c9] text-[20px]">credit_card</span>
-<input class="bg-transparent border-none text-white text-sm w-full focus:ring-0 p-0" placeholder="0000 0000 0000 0000" type="text" value="4242 4242 4242 9821"/>
-</div>
-</div>
-</div>
-<div class="flex gap-4">
-<div class="flex-1">
-<label class="text-xs font-medium text-[#92a4c9] mb-1.5 block">Expiry Date</label>
-<input class="w-full bg-[#111722] border-none text-white text-sm rounded-lg px-3 py-2.5 focus:ring-1 focus:ring-primary" placeholder="MM/YY" type="text" value="12/25"/>
-</div>
-<div class="flex-1">
-<label class="text-xs font-medium text-[#92a4c9] mb-1.5 block">CVC</label>
-<input class="w-full bg-[#111722] border-none text-white text-sm rounded-lg px-3 py-2.5 focus:ring-1 focus:ring-primary" placeholder="123" type="password" value="***"/>
-</div>
-</div>
-</div>
-</div>
-<!-- Action Button -->
-<div class="pt-2">
-<button class="w-full bg-primary hover:bg-blue-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-blue-900/20 transition-all active:scale-[0.99] flex items-center justify-center gap-2">
-<span>Confirm Deposit</span>
-<span class="material-symbols-outlined">arrow_forward</span>
-</button>
-<p class="text-center text-[#92a4c9] text-xs mt-4">
-                        By continuing, you agree to our <a class="text-primary hover:underline" href="#">Terms of Service</a> and processing of your personal data.
-                    </p>
-</div>
-</div>
-<!-- Right Column: Context/Sidebar -->
-<div class="w-full lg:w-80 flex flex-col gap-6">
-<!-- Recent Activity Card -->
-<div class="bg-[#232f48] rounded-xl p-5 h-full border border-[#324467]/30">
-<div class="flex justify-between items-center mb-6">
-<h3 class="text-white text-base font-bold">Recent Activity</h3>
-<a class="text-primary text-xs font-bold hover:underline" href="#">View All</a>
-</div>
-<div class="flex flex-col gap-5">
-<!-- Item 1 -->
-<div class="flex items-center justify-between gap-3">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-<span class="material-symbols-outlined text-[20px]">arrow_downward</span>
-</div>
-<div class="flex flex-col">
-<span class="text-white text-sm font-bold">Deposit</span>
-<span class="text-[#92a4c9] text-xs">Today, 10:23 AM</span>
-</div>
-</div>
-<span class="text-green-400 text-sm font-bold">+$450.00</span>
-</div>
-<!-- Item 2 -->
-<div class="flex items-center justify-between gap-3">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-white/5 flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-[20px]">arrow_upward</span>
-</div>
-<div class="flex flex-col">
-<span class="text-white text-sm font-bold">Netflix</span>
-<span class="text-[#92a4c9] text-xs">Yesterday</span>
-</div>
-</div>
-<span class="text-white text-sm font-bold">-$12.99</span>
-</div>
-<!-- Item 3 -->
-<div class="flex items-center justify-between gap-3">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-white/5 flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-[20px]">swap_horiz</span>
-</div>
-<div class="flex flex-col">
-<span class="text-white text-sm font-bold">Transfer</span>
-<span class="text-[#92a4c9] text-xs">Oct 24, 2023</span>
-</div>
-</div>
-<span class="text-white text-sm font-bold">-$200.00</span>
-</div>
-<!-- Item 4 -->
-<div class="flex items-center justify-between gap-3">
-<div class="flex items-center gap-3">
-<div class="size-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-<span class="material-symbols-outlined text-[20px]">arrow_downward</span>
-</div>
-<div class="flex flex-col">
-<span class="text-white text-sm font-bold">Deposit</span>
-<span class="text-[#92a4c9] text-xs">Oct 20, 2023</span>
-</div>
-</div>
-<span class="text-green-400 text-sm font-bold">+$1,200.00</span>
-</div>
-</div>
-<div class="mt-8 pt-6 border-t border-[#324467]">
-<h4 class="text-[#92a4c9] text-xs font-bold uppercase tracking-wider mb-4">Quick Limits</h4>
-<div class="flex flex-col gap-3">
-<div class="flex justify-between text-xs">
-<span class="text-white">Daily Limit</span>
-<span class="text-[#92a4c9]">$2,300 / $5,000</span>
-</div>
-<div class="w-full bg-[#111722] rounded-full h-1">
-<div class="bg-primary h-1 rounded-full" style="width: 46%"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-</body></html>
+{% block title %}Deposit & Withdraw - Demo Bank{% endblock %}
+
+{% block content %}
+<div class="px-4 md:px-10 lg:px-14 py-8 w-full max-w-[1200px] mx-auto flex flex-col gap-6">
+    <!-- Page Heading -->
+    <div class="flex flex-wrap justify-between gap-3 pb-2">
+        <div class="flex min-w-72 flex-col gap-2">
+            <h1 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Deposit &amp; Withdraw</h1>
+            <p class="text-slate-500 dark:text-[#92a4c9] text-base font-normal leading-normal">Securely manage your funds with multiple payment options.</p>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#232f48] border border-slate-200 dark:border-[#324467]/30 shadow-sm">
+            <div class="flex justify-between items-start">
+                <p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal">Total Balance</p>
+                <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+            </div>
+            <p class="text-slate-900 dark:text-white tracking-light text-2xl font-bold leading-tight">$12,450.00</p>
+        </div>
+        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#232f48] border border-slate-200 dark:border-[#324467]/30 shadow-sm">
+            <div class="flex justify-between items-start">
+                <p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal">Daily Limit</p>
+                <span class="material-symbols-outlined text-slate-400 dark:text-[#92a4c9]">timelapse</span>
+            </div>
+            <p class="text-slate-900 dark:text-white tracking-light text-2xl font-bold leading-tight">$5,000.00</p>
+            <div class="w-full bg-slate-100 dark:bg-[#111722] rounded-full h-1.5 mt-1">
+                <div class="bg-green-500 h-1.5 rounded-full" style="width: 45%"></div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#232f48] border border-slate-200 dark:border-[#324467]/30 shadow-sm">
+            <div class="flex justify-between items-start">
+                <p class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal">Available for Withdrawal</p>
+                <span class="material-symbols-outlined text-slate-400 dark:text-[#92a4c9]">check_circle</span>
+            </div>
+            <p class="text-slate-900 dark:text-white tracking-light text-2xl font-bold leading-tight">$11,900.00</p>
+        </div>
+    </div>
+
+    <!-- Split View: Form + Sidebar -->
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Left Column: Transaction Form -->
+        <div class="flex-1 flex flex-col gap-6">
+            <!-- Tabs -->
+            <div class="border-b border-slate-200 dark:border-[#324467]">
+                <div class="flex gap-8">
+                    <a class="group flex items-center gap-2 border-b-[3px] border-b-primary pb-4 px-2 cursor-pointer" href="#">
+                        <span class="material-symbols-outlined text-primary group-hover:text-blue-400">add_card</span>
+                        <p class="text-slate-900 dark:text-white text-sm font-bold leading-normal tracking-[0.015em]">Deposit Funds</p>
+                    </a>
+                    <a class="group flex items-center gap-2 border-b-[3px] border-b-transparent hover:border-b-slate-300 dark:hover:border-b-[#324467] pb-4 px-2 cursor-pointer transition-colors" href="#">
+                        <span class="material-symbols-outlined text-slate-500 dark:text-[#92a4c9] group-hover:text-slate-700 dark:group-hover:text-white">credit_card_off</span>
+                        <p class="text-slate-500 dark:text-[#92a4c9] group-hover:text-slate-700 dark:group-hover:text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors">Withdraw Funds</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Method Selection -->
+            <div class="flex flex-col gap-4">
+                <h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">1. Select Method</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Method 1: Card (Selected) -->
+                    <div class="relative cursor-pointer group rounded-xl bg-white dark:bg-[#232f48] p-4 border-2 border-primary transition-all hover:bg-slate-50 dark:hover:bg-[#2a3855] shadow-sm">
+                        <div class="absolute top-2 right-2 text-primary">
+                            <span class="material-symbols-outlined text-[20px]">check_circle</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-3 py-2">
+                            <div class="p-3 rounded-full bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                <span class="material-symbols-outlined">credit_card</span>
+                            </div>
+                            <span class="text-slate-900 dark:text-white text-sm font-medium">Credit Card</span>
+                        </div>
+                    </div>
+                    <!-- Method 2: Bank Transfer -->
+                    <div class="cursor-pointer group rounded-xl bg-white dark:bg-[#232f48] p-4 border-2 border-transparent hover:border-slate-300 dark:hover:border-[#324467] transition-all hover:bg-slate-50 dark:hover:bg-[#2a3855] shadow-sm">
+                        <div class="flex flex-col items-center gap-3 py-2">
+                            <div class="p-3 rounded-full bg-slate-100 dark:bg-[#111722] text-slate-500 dark:text-[#92a4c9] group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">account_balance</span>
+                            </div>
+                            <span class="text-slate-500 dark:text-[#92a4c9] group-hover:text-slate-900 dark:group-hover:text-white text-sm font-medium transition-colors">Bank Transfer</span>
+                        </div>
+                    </div>
+                    <!-- Method 3: Mobile Money -->
+                    <div class="cursor-pointer group rounded-xl bg-white dark:bg-[#232f48] p-4 border-2 border-transparent hover:border-slate-300 dark:hover:border-[#324467] transition-all hover:bg-slate-50 dark:hover:bg-[#2a3855] shadow-sm">
+                        <div class="flex flex-col items-center gap-3 py-2">
+                            <div class="p-3 rounded-full bg-slate-100 dark:bg-[#111722] text-slate-500 dark:text-[#92a4c9] group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">smartphone</span>
+                            </div>
+                            <span class="text-slate-500 dark:text-[#92a4c9] group-hover:text-slate-900 dark:group-hover:text-white text-sm font-medium transition-colors">Mobile Money</span>
+                        </div>
+                    </div>
+                    <!-- Method 4: Crypto -->
+                    <div class="cursor-pointer group rounded-xl bg-white dark:bg-[#232f48] p-4 border-2 border-transparent hover:border-slate-300 dark:hover:border-[#324467] transition-all hover:bg-slate-50 dark:hover:bg-[#2a3855] shadow-sm">
+                        <div class="flex flex-col items-center gap-3 py-2">
+                            <div class="p-3 rounded-full bg-slate-100 dark:bg-[#111722] text-slate-500 dark:text-[#92a4c9] group-hover:bg-primary/20 group-hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">currency_bitcoin</span>
+                            </div>
+                            <span class="text-slate-500 dark:text-[#92a4c9] group-hover:text-slate-900 dark:group-hover:text-white text-sm font-medium transition-colors">Crypto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amount Input -->
+            <div class="flex flex-col gap-4">
+                <h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">2. Enter Amount</h3>
+                <div class="flex flex-col gap-2">
+                    <div class="relative flex items-center w-full">
+                        <span class="absolute left-4 text-slate-500 dark:text-[#92a4c9] text-lg font-medium">$</span>
+                        <input class="w-full bg-white dark:bg-[#232f48] border border-slate-200 dark:border-none text-slate-900 dark:text-white text-3xl font-bold placeholder:text-slate-400 dark:placeholder:text-[#324467] rounded-xl py-6 pl-10 pr-24 focus:ring-2 focus:ring-primary focus:outline-none shadow-sm" placeholder="0.00" type="number" value="1250.00"/>
+                        <div class="absolute right-4 flex items-center">
+                            <button class="text-xs font-bold text-primary bg-primary/10 hover:bg-primary/20 px-3 py-1.5 rounded uppercase tracking-wider transition-colors">Max</button>
+                            <div class="h-6 w-[1px] bg-slate-200 dark:bg-[#324467] mx-3"></div>
+                            <span class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium">USD</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between px-2">
+                        <p class="text-slate-500 dark:text-[#92a4c9] text-xs">Transaction Fee: <span class="text-slate-900 dark:text-white">$2.50</span></p>
+                        <p class="text-slate-500 dark:text-[#92a4c9] text-xs">Exchange Rate: <span class="text-slate-900 dark:text-white">1 USD = 1.00 USD</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Details (Dynamic Section) -->
+            <div class="flex flex-col gap-4">
+                <h3 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">3. Card Details</h3>
+                <div class="flex flex-col gap-4 p-4 rounded-xl bg-white dark:bg-[#232f48] border border-slate-200 dark:border-[#324467]/30 shadow-sm">
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <label class="text-xs font-medium text-slate-500 dark:text-[#92a4c9] mb-1.5 block">Card Number</label>
+                            <div class="flex items-center gap-2 bg-slate-100 dark:bg-[#111722] rounded-lg px-3 py-2.5">
+                                <span class="material-symbols-outlined text-slate-500 dark:text-[#92a4c9] text-[20px]">credit_card</span>
+                                <input class="bg-transparent border-none text-slate-900 dark:text-white text-sm w-full focus:ring-0 p-0" placeholder="0000 0000 0000 0000" type="text" value="4242 4242 4242 9821"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="flex-1">
+                            <label class="text-xs font-medium text-slate-500 dark:text-[#92a4c9] mb-1.5 block">Expiry Date</label>
+                            <input class="w-full bg-slate-100 dark:bg-[#111722] border-none text-slate-900 dark:text-white text-sm rounded-lg px-3 py-2.5 focus:ring-1 focus:ring-primary" placeholder="MM/YY" type="text" value="12/25"/>
+                        </div>
+                        <div class="flex-1">
+                            <label class="text-xs font-medium text-slate-500 dark:text-[#92a4c9] mb-1.5 block">CVC</label>
+                            <input class="w-full bg-slate-100 dark:bg-[#111722] border-none text-slate-900 dark:text-white text-sm rounded-lg px-3 py-2.5 focus:ring-1 focus:ring-primary" placeholder="123" type="password" value="***"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <div class="pt-2">
+                <button class="w-full bg-primary hover:bg-blue-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg shadow-blue-900/20 transition-all active:scale-[0.99] flex items-center justify-center gap-2">
+                    <span>Confirm Deposit</span>
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+                <p class="text-center text-slate-500 dark:text-[#92a4c9] text-xs mt-4">
+                    By continuing, you agree to our <a class="text-primary hover:underline" href="#">Terms of Service</a> and processing of your personal data.
+                </p>
+            </div>
+        </div>
+
+        <!-- Right Column: Context/Sidebar -->
+        <div class="w-full lg:w-80 flex flex-col gap-6">
+            <!-- Recent Activity Card -->
+            <div class="bg-white dark:bg-[#232f48] rounded-xl p-5 h-full border border-slate-200 dark:border-[#324467]/30 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-slate-900 dark:text-white text-base font-bold">Recent Activity</h3>
+                    <a class="text-primary text-xs font-bold hover:underline" href="{% url 'transaction_history' %}">View All</a>
+                </div>
+                <div class="flex flex-col gap-5">
+                    <!-- Item 1 -->
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-900 dark:text-white text-sm font-bold">Deposit</span>
+                                <span class="text-slate-500 dark:text-[#92a4c9] text-xs">Today, 10:23 AM</span>
+                            </div>
+                        </div>
+                        <span class="text-green-500 dark:text-green-400 text-sm font-bold">+$450.00</span>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-700 dark:text-white">
+                                <span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-900 dark:text-white text-sm font-bold">Netflix</span>
+                                <span class="text-slate-500 dark:text-[#92a4c9] text-xs">Yesterday</span>
+                            </div>
+                        </div>
+                        <span class="text-slate-900 dark:text-white text-sm font-bold">-$12.99</span>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-700 dark:text-white">
+                                <span class="material-symbols-outlined text-[20px]">swap_horiz</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-900 dark:text-white text-sm font-bold">Transfer</span>
+                                <span class="text-slate-500 dark:text-[#92a4c9] text-xs">Oct 24, 2023</span>
+                            </div>
+                        </div>
+                        <span class="text-slate-900 dark:text-white text-sm font-bold">-$200.00</span>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                                <span class="material-symbols-outlined text-[20px]">arrow_downward</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-slate-900 dark:text-white text-sm font-bold">Deposit</span>
+                                <span class="text-slate-500 dark:text-[#92a4c9] text-xs">Oct 20, 2023</span>
+                            </div>
+                        </div>
+                        <span class="text-green-500 dark:text-green-400 text-sm font-bold">+$1,200.00</span>
+                    </div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-slate-200 dark:border-[#324467]">
+                    <h4 class="text-slate-500 dark:text-[#92a4c9] text-xs font-bold uppercase tracking-wider mb-4">Quick Limits</h4>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-900 dark:text-white">Daily Limit</span>
+                            <span class="text-slate-500 dark:text-[#92a4c9]">$2,300 / $5,000</span>
+                        </div>
+                        <div class="w-full bg-slate-100 dark:bg-[#111722] rounded-full h-1">
+                            <div class="bg-primary h-1 rounded-full" style="width: 46%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
