@@ -1,325 +1,249 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Account Details - NovaBank</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#135bec",
-                        "background-light": "#f6f6f8",
-                        "background-dark": "#101622",
-                    },
-                    fontFamily: {
-                        "display": ["Manrope", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
-            },
-        }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display overflow-x-hidden">
-<div class="relative flex h-full min-h-screen w-full flex-col group/design-root">
-<!-- Top Navigation -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e5e7eb] dark:border-[#232f48] px-4 sm:px-10 py-3 bg-white dark:bg-[#111722]">
-<div class="flex items-center gap-4 text-[#111418] dark:text-white">
-<div class="size-8 flex items-center justify-center bg-primary/10 rounded-lg text-primary">
-<span class="material-symbols-outlined">account_balance</span>
-</div>
-<h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">NovaBank</h2>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<div class="hidden md:flex items-center gap-9">
-<a class="text-[#111418] dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
-<a class="text-[#111418] dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Accounts</a>
-<a class="text-[#111418] dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Transfers</a>
-<a class="text-[#111418] dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Services</a>
-</div>
-<div class="flex items-center gap-4">
-<button class="text-[#111418] dark:text-white hover:text-primary">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-transparent hover:border-primary transition-all cursor-pointer" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQG7m9OEUiUbs31ZhgSLXA13GdngFRT3UQSPEDeA9OGD876UVfjG5EbpKrm0HZFQ1B1Ou6I_sVINn9_N1qh9xkUj8Mpit1UpY8If-WOCqr348Ser8A2DCGAMqNSL07hmMioJzuoIbRT5sD2N_5zBqa6kJ3rOYTJ5W4CSsEhM8LnUaDRGu5nc62ZlKs19o-RL2FHQSnWD47XIyvNulIkEiZu3GQEZAHwscWmpVWM3_Sz5a7J0zf0itAwI8WjjTwRkMDjszcXfngqDg9");'></div>
-</div>
-</div>
-</header>
-<div class="layout-container flex h-full grow flex-col">
-<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
-<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
-<!-- Breadcrumbs -->
-<div class="flex flex-wrap gap-2 px-4 py-2">
-<a class="text-[#637588] dark:text-[#92a4c9] text-sm font-medium leading-normal hover:text-primary" href="#">Home</a>
-<span class="text-[#637588] dark:text-[#92a4c9] text-sm font-medium leading-normal">/</span>
-<a class="text-[#637588] dark:text-[#92a4c9] text-sm font-medium leading-normal hover:text-primary" href="#">Accounts</a>
-<span class="text-[#637588] dark:text-[#92a4c9] text-sm font-medium leading-normal">/</span>
-<span class="text-[#111418] dark:text-white text-sm font-medium leading-normal">Checking</span>
-</div>
-<!-- Page Heading & Balance -->
-<div class="flex flex-col md:flex-row justify-between gap-6 p-4">
-<div class="flex flex-col gap-2">
-<div class="flex items-center gap-3">
-<h1 class="text-[#111418] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Checking Account</h1>
-<span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded">Active</span>
-</div>
-<div class="flex items-center gap-2 text-[#637588] dark:text-[#92a4c9]">
-<p class="text-sm font-normal leading-normal">****4589 • Routing ****1234</p>
-<button class="text-primary hover:text-primary/80">
-<span class="material-symbols-outlined text-[18px]">content_copy</span>
-</button>
-</div>
-</div>
-<div class="flex items-center gap-3">
-<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-white dark:bg-[#232f48] border border-[#e5e7eb] dark:border-transparent text-[#111418] dark:text-white text-sm font-bold shadow-sm hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors">
-<span class="material-symbols-outlined mr-2 text-[20px]">settings</span>
-<span>Settings</span>
-</button>
-</div>
-</div>
-<!-- Balance Display -->
-<div class="px-4 pb-6">
-<p class="text-[#637588] dark:text-[#92a4c9] text-sm font-normal leading-normal mb-1">Available Balance</p>
-<h2 class="text-[#111418] dark:text-white tracking-tight text-[40px] font-bold leading-tight">$12,450.00</h2>
-</div>
-<!-- Action Buttons -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 mb-8">
-<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-primary hover:bg-primary/90 text-white transition-all shadow-lg shadow-primary/20">
-<span class="material-symbols-outlined text-3xl">add_circle</span>
-<span class="text-sm font-bold">Deposit</span>
-</button>
-<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white dark:bg-[#1e293b] hover:bg-gray-50 dark:hover:bg-[#2d3b55] text-[#111418] dark:text-white border border-[#e5e7eb] dark:border-[#232f48] transition-all">
-<span class="material-symbols-outlined text-3xl text-primary">remove_circle</span>
-<span class="text-sm font-bold">Withdraw</span>
-</button>
-<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white dark:bg-[#1e293b] hover:bg-gray-50 dark:hover:bg-[#2d3b55] text-[#111418] dark:text-white border border-[#e5e7eb] dark:border-[#232f48] transition-all">
-<span class="material-symbols-outlined text-3xl text-primary">swap_horiz</span>
-<span class="text-sm font-bold">Transfer</span>
-</button>
-<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white dark:bg-[#1e293b] hover:bg-gray-50 dark:hover:bg-[#2d3b55] text-[#111418] dark:text-white border border-[#e5e7eb] dark:border-[#232f48] transition-all">
-<span class="material-symbols-outlined text-3xl text-primary">more_horiz</span>
-<span class="text-sm font-bold">More</span>
-</button>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4">
-<!-- Left Column: Transactions -->
-<div class="lg:col-span-2 flex flex-col gap-4">
-<!-- Filters -->
-<div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white dark:bg-[#1e293b] p-4 rounded-xl border border-[#e5e7eb] dark:border-[#232f48]">
-<h3 class="text-lg font-bold text-[#111418] dark:text-white w-full sm:w-auto">Transactions</h3>
-<div class="flex gap-3 w-full sm:w-auto">
-<div class="relative flex-1 sm:flex-initial">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#637588] dark:text-[#92a4c9] text-[20px]">search</span>
-<input class="w-full sm:w-48 pl-10 pr-4 py-2 bg-[#f3f4f6] dark:bg-[#111722] rounded-lg text-sm text-[#111418] dark:text-white border-none focus:ring-2 focus:ring-primary placeholder-[#637588] dark:placeholder-[#637588]" placeholder="Search" type="text"/>
-</div>
-<button class="flex items-center justify-center size-9 rounded-lg bg-[#f3f4f6] dark:bg-[#111722] text-[#111418] dark:text-white hover:text-primary">
-<span class="material-symbols-outlined text-[20px]">filter_list</span>
-</button>
-</div>
-</div>
-<!-- Transaction List -->
-<div class="bg-white dark:bg-[#1e293b] rounded-xl overflow-hidden border border-[#e5e7eb] dark:border-[#232f48]">
-<!-- Date Divider -->
-<div class="px-5 py-3 bg-[#f9fafb] dark:bg-[#232f48]/50 border-b border-[#e5e7eb] dark:border-[#232f48]">
-<p class="text-xs font-bold text-[#637588] dark:text-[#92a4c9] uppercase tracking-wider">Today</p>
-</div>
-<!-- Item 1 -->
-<div class="flex items-center justify-between p-5 border-b border-[#e5e7eb] dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">music_note</span>
-</div>
-<div>
-<p class="text-[#111418] dark:text-white font-bold text-base">Spotify Premium</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-sm">Subscription</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-[#111418] dark:text-white font-bold text-base">-$11.99</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-xs">Pending</p>
-</div>
-</div>
-<!-- Item 2 -->
-<div class="flex items-center justify-between p-5 border-b border-[#e5e7eb] dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">payments</span>
-</div>
-<div>
-<p class="text-[#111418] dark:text-white font-bold text-base">Employer Inc.</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-sm">Direct Deposit</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-emerald-600 dark:text-emerald-400 font-bold text-base">+$2,500.00</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-xs">Completed</p>
-</div>
-</div>
-<!-- Date Divider -->
-<div class="px-5 py-3 bg-[#f9fafb] dark:bg-[#232f48]/50 border-b border-[#e5e7eb] dark:border-[#232f48] border-t border-t-[#e5e7eb] dark:border-t-[#232f48]">
-<p class="text-xs font-bold text-[#637588] dark:text-[#92a4c9] uppercase tracking-wider">Yesterday</p>
-</div>
-<!-- Item 3 -->
-<div class="flex items-center justify-between p-5 border-b border-[#e5e7eb] dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">local_dining</span>
-</div>
-<div>
-<p class="text-[#111418] dark:text-white font-bold text-base">Uber Eats</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-sm">Food &amp; Dining</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-[#111418] dark:text-white font-bold text-base">-$34.50</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-xs">Completed</p>
-</div>
-</div>
-<!-- Item 4 -->
-<div class="flex items-center justify-between p-5 border-b border-[#e5e7eb] dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
-<div class="flex items-center gap-4">
-<div class="size-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover:scale-110 transition-transform">
-<span class="material-symbols-outlined">shopping_bag</span>
-</div>
-<div>
-<p class="text-[#111418] dark:text-white font-bold text-base">Target Store</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-sm">Shopping</p>
-</div>
-</div>
-<div class="text-right">
-<p class="text-[#111418] dark:text-white font-bold text-base">-$89.20</p>
-<p class="text-[#637588] dark:text-[#92a4c9] text-xs">Completed</p>
-</div>
-</div>
-<div class="p-4 flex justify-center border-t border-[#e5e7eb] dark:border-[#232f48]">
-<button class="text-sm font-bold text-primary hover:underline">View All Transactions</button>
-</div>
-</div>
-</div>
-<!-- Right Column: Sidebar -->
-<div class="flex flex-col gap-6">
-<!-- Card Preview -->
-<div class="relative w-full aspect-[1.586] rounded-xl overflow-hidden shadow-xl group">
-<div class="absolute inset-0 bg-gradient-to-br from-[#135bec] to-[#0a2e7a] z-0"></div>
-<div class="relative z-10 p-6 flex flex-col justify-between h-full text-white">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-3xl">contactless</span>
-<span class="text-lg font-bold tracking-wider italic">VISA</span>
-</div>
-<div>
-<p class="text-sm opacity-80 mb-1">Card Number</p>
-<div class="flex gap-4 font-mono text-lg tracking-widest">
-<span>****</span><span>****</span><span>****</span><span>4589</span>
-</div>
-</div>
-<div class="flex justify-between items-end">
-<div>
-<p class="text-xs opacity-80">Card Holder</p>
-<p class="font-medium">ALEX MORGAN</p>
-</div>
-<div>
-<p class="text-xs opacity-80">Expires</p>
-<p class="font-medium">12/26</p>
-</div>
-</div>
-</div>
-<!-- Pattern overlay -->
-<div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.8),transparent)]" data-alt="abstract decorative circular gradient overlay"></div>
-</div>
-<!-- Spending Stats -->
-<div class="bg-white dark:bg-[#1e293b] rounded-xl p-5 border border-[#e5e7eb] dark:border-[#232f48]">
-<div class="flex items-center justify-between mb-4">
-<h3 class="font-bold text-[#111418] dark:text-white">Monthly Spending</h3>
-<span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded">-4.5% vs last mo</span>
-</div>
-<div class="space-y-4">
-<!-- Stat 1 -->
-<div>
-<div class="flex justify-between text-sm mb-1">
-<span class="text-[#637588] dark:text-[#92a4c9]">Shopping</span>
-<span class="text-[#111418] dark:text-white font-bold">$1,240</span>
-</div>
-<div class="h-2 w-full bg-[#f3f4f6] dark:bg-[#111722] rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[65%] rounded-full"></div>
-</div>
-</div>
-<!-- Stat 2 -->
-<div>
-<div class="flex justify-between text-sm mb-1">
-<span class="text-[#637588] dark:text-[#92a4c9]">Food &amp; Dining</span>
-<span class="text-[#111418] dark:text-white font-bold">$850</span>
-</div>
-<div class="h-2 w-full bg-[#f3f4f6] dark:bg-[#111722] rounded-full overflow-hidden">
-<div class="h-full bg-orange-500 w-[45%] rounded-full"></div>
-</div>
-</div>
-<!-- Stat 3 -->
-<div>
-<div class="flex justify-between text-sm mb-1">
-<span class="text-[#637588] dark:text-[#92a4c9]">Bills</span>
-<span class="text-[#111418] dark:text-white font-bold">$420</span>
-</div>
-<div class="h-2 w-full bg-[#f3f4f6] dark:bg-[#111722] rounded-full overflow-hidden">
-<div class="h-full bg-purple-500 w-[20%] rounded-full"></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Quick Transfer Widget -->
-<div class="bg-white dark:bg-[#1e293b] rounded-xl p-5 border border-[#e5e7eb] dark:border-[#232f48]">
-<h3 class="font-bold text-[#111418] dark:text-white mb-4">Quick Transfer</h3>
-<div class="flex items-center gap-3 mb-4 overflow-x-auto pb-2 scrollbar-hide">
-<div class="flex flex-col items-center gap-1 min-w-[60px]">
-<div class="size-12 rounded-full border-2 border-dashed border-[#637588] dark:border-[#92a4c9] flex items-center justify-center text-[#637588] dark:text-[#92a4c9] cursor-pointer hover:border-primary hover:text-primary transition-colors">
-<span class="material-symbols-outlined">add</span>
-</div>
-<span class="text-xs text-[#637588] dark:text-[#92a4c9]">Add New</span>
-</div>
-<div class="flex flex-col items-center gap-1 min-w-[60px]">
-<div class="size-12 rounded-full bg-cover bg-center cursor-pointer hover:ring-2 hover:ring-primary transition-all" data-alt="Profile picture of Sarah M." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDazSZsMBLV4MpNhsRmYrxqE0ug6cgdFjAIzx3g4dNgbnroVq8HEvp3cSfqZwc-PVCExSanRoml4u6w7-mJghOpvH8OwYSx9odU5OpYNa-PmReN3tBQLCoqjFF2N-G3a9RgvikSKRISl8XhsnMkNmLF4oM0uUpKB28-25seSXJbONHLZJuc1Lm18gi5-v2u9zsosjM-b8uiWj0Qe3RhILE0t8cZLbMyUAbL5oCM6hClhcFc6riySZK_PuGmBPaYmw53_ySGZOwo8aPG");'></div>
-<span class="text-xs text-[#111418] dark:text-white font-medium">Sarah</span>
-</div>
-<div class="flex flex-col items-center gap-1 min-w-[60px]">
-<div class="size-12 rounded-full bg-cover bg-center cursor-pointer hover:ring-2 hover:ring-primary transition-all" data-alt="Profile picture of Mike T." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYIVSGiuBxC4wYMVUXqM0ZWZiqZE9SWG-SV1w05HivEtPWovUMSCOnD-gN6ZxfJfV1DCO2lIBp7K8e5REOefLaMtb6cxRSo-Ee5XfxSr4pGfFxWbsnEflgC86-i27WmgLEdNRHqfyfepFsd013-KRXnVntK1P7ydmINf1K4kafMUGLEIJgF6FUI6xn2RY2tsQhCCS4uGu3NQ4abW5Nfd3QsBcUFiXgnynuXi9eUoT7qugzqzTxrrEb8Jch5Lu2qxt_E5rt_r4j3yp0");'></div>
-<span class="text-xs text-[#111418] dark:text-white font-medium">Mike</span>
-</div>
-<div class="flex flex-col items-center gap-1 min-w-[60px]">
-<div class="size-12 rounded-full bg-cover bg-center cursor-pointer hover:ring-2 hover:ring-primary transition-all" data-alt="Profile picture of Emily R." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBl0rQK8Ii3J5z8C8eHhZOTebPmY48zM8o_0wv9Q6zsCbA4lYLtxneVlo3giPxVyCf5-GK41tC85MW9m5fDXhd7-aeha0pdPlaWQ7k5vwctekxBbDoUMzUWcnFPatHZgDFQMGLxfr8A5EasMyVLnI8WBKDhei1r3zen6Pwjke7yGQ1XxW8GoAKkGMSIaeUQ3e4P7_c58r2f03fNvXsvvL6ejfqKp_FerbcIR3IVLukkoWgA_ew0UB8jHyYY6lyZkcyuY9ZBz3SwM5_C");'></div>
-<span class="text-xs text-[#111418] dark:text-white font-medium">Emily</span>
-</div>
-</div>
-<div class="relative">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-[#111418] dark:text-white">$</span>
-<input class="w-full pl-7 pr-4 py-2 bg-[#f3f4f6] dark:bg-[#111722] rounded-lg text-[#111418] dark:text-white border-none focus:ring-2 focus:ring-primary font-bold" placeholder="0.00" type="number"/>
-<button class="absolute right-1 top-1 bottom-1 px-3 bg-primary text-white text-xs font-bold rounded hover:bg-primary/90">Send</button>
-</div>
-</div>
-</div>
-</div>
-<footer class="mt-12 py-6 text-center text-sm text-[#637588] dark:text-[#92a4c9]">
-<p>© 2023 NovaBank. All rights reserved.</p>
-</footer>
-</div>
-</div>
-</div>
-</div>
-</body></html>
+{% block title %}Account Details - Demo Bank{% endblock %}
+
+{% block content %}
+<div class="px-4 md:px-10 lg:px-14 flex flex-1 justify-center py-5">
+    <div class="flex flex-col max-w-[1200px] flex-1 w-full">
+        <!-- Breadcrumbs -->
+        <div class="flex flex-wrap gap-2 px-4 py-2">
+            <a class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal hover:text-primary" href="{% url 'dashboard' %}">Home</a>
+            <span class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal">/</span>
+            <a class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal hover:text-primary" href="#">Accounts</a>
+            <span class="text-slate-500 dark:text-[#92a4c9] text-sm font-medium leading-normal">/</span>
+            <span class="text-slate-900 dark:text-white text-sm font-medium leading-normal">Checking</span>
+        </div>
+        
+        <!-- Page Heading & Balance -->
+        <div class="flex flex-col md:flex-row justify-between gap-6 p-4">
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-3">
+                    <h1 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Checking Account</h1>
+                    <span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded">Active</span>
+                </div>
+                <div class="flex items-center gap-2 text-slate-500 dark:text-[#92a4c9]">
+                    <p class="text-sm font-normal leading-normal">****4589 • Routing ****1234</p>
+                    <button class="text-primary hover:text-primary/80">
+                        <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="flex items-center justify-center rounded-lg h-10 px-4 bg-white dark:bg-[#232f48] border border-slate-200 dark:border-transparent text-slate-900 dark:text-white text-sm font-bold shadow-sm hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors">
+                    <span class="material-symbols-outlined mr-2 text-[20px]">settings</span>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Balance Display -->
+        <div class="px-4 pb-6">
+            <p class="text-slate-500 dark:text-[#92a4c9] text-sm font-normal leading-normal mb-1">Available Balance</p>
+            <h2 class="text-slate-900 dark:text-white tracking-tight text-[40px] font-bold leading-tight">$12,450.00</h2>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 mb-8">
+            <button onclick="window.location.href='{% url 'deposit_withdrawal' %}'" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-primary hover:bg-primary/90 text-white transition-all shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-3xl">add_circle</span>
+                <span class="text-sm font-bold">Deposit</span>
+            </button>
+            <button onclick="window.location.href='{% url 'deposit_withdrawal' %}'" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white dark:bg-[#1e293b] hover:bg-gray-50 dark:hover:bg-[#2d3b55] text-slate-900 dark:text-white border border-slate-200 dark:border-[#232f48] transition-all">
+                <span class="material-symbols-outlined text-3xl text-primary">remove_circle</span>
+                <span class="text-sm font-bold">Withdraw</span>
+            </button>
+            <button onclick="window.location.href='{% url 'transfer_funds' %}'" class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white dark:bg-[#1e293b] hover:bg-gray-50 dark:hover:bg-[#2d3b55] text-slate-900 dark:text-white border border-slate-200 dark:border-[#232f48] transition-all">
+                <span class="material-symbols-outlined text-3xl text-primary">swap_horiz</span>
+                <span class="text-sm font-bold">Transfer</span>
+            </button>
+            <button class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl bg-white dark:bg-[#1e293b] hover:bg-gray-50 dark:hover:bg-[#2d3b55] text-slate-900 dark:text-white border border-slate-200 dark:border-[#232f48] transition-all">
+                <span class="material-symbols-outlined text-3xl text-primary">more_horiz</span>
+                <span class="text-sm font-bold">More</span>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4">
+            <!-- Left Column: Transactions -->
+            <div class="lg:col-span-2 flex flex-col gap-4">
+                <!-- Filters -->
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white dark:bg-[#1e293b] p-4 rounded-xl border border-slate-200 dark:border-[#232f48]">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white w-full sm:w-auto">Transactions</h3>
+                    <div class="flex gap-3 w-full sm:w-auto">
+                        <div class="relative flex-1 sm:flex-initial">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 dark:text-[#92a4c9] text-[20px]">search</span>
+                            <input class="w-full sm:w-48 pl-10 pr-4 py-2 bg-slate-100 dark:bg-[#111722] rounded-lg text-sm text-slate-900 dark:text-white border-none focus:ring-2 focus:ring-primary placeholder-slate-500 dark:placeholder-[#637588]" placeholder="Search" type="text"/>
+                        </div>
+                        <button class="flex items-center justify-center size-9 rounded-lg bg-slate-100 dark:bg-[#111722] text-slate-900 dark:text-white hover:text-primary">
+                            <span class="material-symbols-outlined text-[20px]">filter_list</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Transaction List -->
+                <div class="bg-white dark:bg-[#1e293b] rounded-xl overflow-hidden border border-slate-200 dark:border-[#232f48]">
+                    <!-- Date Divider -->
+                    <div class="px-5 py-3 bg-slate-50 dark:bg-[#232f48]/50 border-b border-slate-200 dark:border-[#232f48]">
+                        <p class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider">Today</p>
+                    </div>
+                    <!-- Item 1 -->
+                    <div class="flex items-center justify-between p-5 border-b border-slate-200 dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
+                        <div class="flex items-center gap-4">
+                            <div class="size-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">music_note</span>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-bold text-base">Spotify Premium</p>
+                                <p class="text-slate-500 dark:text-[#92a4c9] text-sm">Subscription</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-slate-900 dark:text-white font-bold text-base">-$11.99</p>
+                            <p class="text-slate-500 dark:text-[#92a4c9] text-xs">Pending</p>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="flex items-center justify-between p-5 border-b border-slate-200 dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
+                        <div class="flex items-center gap-4">
+                            <div class="size-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">payments</span>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-bold text-base">Employer Inc.</p>
+                                <p class="text-slate-500 dark:text-[#92a4c9] text-sm">Direct Deposit</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-emerald-600 dark:text-emerald-400 font-bold text-base">+$2,500.00</p>
+                            <p class="text-slate-500 dark:text-[#92a4c9] text-xs">Completed</p>
+                        </div>
+                    </div>
+                     <!-- Date Divider -->
+                    <div class="px-5 py-3 bg-slate-50 dark:bg-[#232f48]/50 border-b border-slate-200 dark:border-[#232f48] border-t border-t-slate-200 dark:border-t-[#232f48]">
+                        <p class="text-xs font-bold text-slate-500 dark:text-[#92a4c9] uppercase tracking-wider">Yesterday</p>
+                    </div>
+                     <!-- Item 3 -->
+                    <div class="flex items-center justify-between p-5 border-b border-slate-200 dark:border-[#232f48] hover:bg-gray-50 dark:hover:bg-[#2d3b55] transition-colors cursor-pointer group">
+                        <div class="flex items-center gap-4">
+                            <div class="size-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined">local_dining</span>
+                            </div>
+                            <div>
+                                <p class="text-slate-900 dark:text-white font-bold text-base">Uber Eats</p>
+                                <p class="text-slate-500 dark:text-[#92a4c9] text-sm">Food &amp; Dining</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-slate-900 dark:text-white font-bold text-base">-$34.50</p>
+                            <p class="text-slate-500 dark:text-[#92a4c9] text-xs">Completed</p>
+                        </div>
+                    </div>
+                     <div class="p-4 flex justify-center border-t border-slate-200 dark:border-[#232f48]">
+                        <a href="{% url 'transaction_history' %}" class="text-sm font-bold text-primary hover:underline">View All Transactions</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Sidebar -->
+            <div class="flex flex-col gap-6">
+                <!-- Card Preview -->
+                <div class="relative w-full aspect-[1.586] rounded-xl overflow-hidden shadow-xl group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#135bec] to-[#0a2e7a] z-0"></div>
+                    <div class="relative z-10 p-6 flex flex-col justify-between h-full text-white">
+                        <div class="flex justify-between items-start">
+                            <span class="material-symbols-outlined text-3xl">contactless</span>
+                            <span class="text-lg font-bold tracking-wider italic">VISA</span>
+                        </div>
+                        <div>
+                            <p class="text-sm opacity-80 mb-1">Card Number</p>
+                            <div class="flex gap-4 font-mono text-lg tracking-widest">
+                                <span>****</span><span>****</span><span>****</span><span>4589</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <p class="text-xs opacity-80">Card Holder</p>
+                                <p class="font-medium">ALEX MORGAN</p>
+                            </div>
+                            <div>
+                                <p class="text-xs opacity-80">Expires</p>
+                                <p class="font-medium">12/26</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pattern overlay -->
+                    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_50%_120%,rgba(255,255,255,0.8),transparent)]" data-alt="abstract decorative circular gradient overlay"></div>
+                </div>
+
+                <!-- Spending Stats -->
+                <div class="bg-white dark:bg-[#1e293b] rounded-xl p-5 border border-slate-200 dark:border-[#232f48]">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-slate-900 dark:text-white">Monthly Spending</h3>
+                        <span class="text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded">-4.5% vs last mo</span>
+                    </div>
+                    <div class="space-y-4">
+                        <!-- Stat 1 -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-500 dark:text-[#92a4c9]">Shopping</span>
+                                <span class="text-slate-900 dark:text-white font-bold">$1,240</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#111722] rounded-full overflow-hidden">
+                                <div class="h-full bg-primary w-[65%] rounded-full"></div>
+                            </div>
+                        </div>
+                        <!-- Stat 2 -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-500 dark:text-[#92a4c9]">Food &amp; Dining</span>
+                                <span class="text-slate-900 dark:text-white font-bold">$850</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#111722] rounded-full overflow-hidden">
+                                <div class="h-full bg-orange-500 w-[45%] rounded-full"></div>
+                            </div>
+                        </div>
+                         <!-- Stat 3 -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-slate-500 dark:text-[#92a4c9]">Bills</span>
+                                <span class="text-slate-900 dark:text-white font-bold">$420</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#111722] rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 w-[20%] rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Transfer Widget -->
+                <div class="bg-white dark:bg-[#1e293b] rounded-xl p-5 border border-slate-200 dark:border-[#232f48]">
+                    <h3 class="font-bold text-slate-900 dark:text-white mb-4">Quick Transfer</h3>
+                    <div class="flex items-center gap-3 mb-4 overflow-x-auto pb-2 scrollbar-hide">
+                         <div class="flex flex-col items-center gap-1 min-w-[60px]">
+                            <div class="size-12 rounded-full border-2 border-dashed border-slate-400 dark:border-[#92a4c9] flex items-center justify-center text-slate-400 dark:text-[#92a4c9] cursor-pointer hover:border-primary hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">add</span>
+                            </div>
+                            <span class="text-xs text-slate-400 dark:text-[#92a4c9]">Add New</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1 min-w-[60px]">
+                            <div class="size-12 rounded-full bg-cover bg-center cursor-pointer hover:ring-2 hover:ring-primary transition-all" data-alt="Profile picture of Sarah M." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDazSZsMBLV4MpNhsRmYrxqE0ug6cgdFjAIzx3g4dNgbnroVq8HEvp3cSfqZwc-PVCExSanRoml4u6w7-mJghOpvH8OwYSx9odU5OpYNa-PmReN3tBQLCoqjFF2N-G3a9RgvikSKRISl8XhsnMkNmLF4oM0uUpKB28-25seSXJbONHLZJuc1Lm18gi5-v2u9zsosjM-b8uiWj0Qe3RhILE0t8cZLbMyUAbL5oCM6hClhcFc6riySZK_PuGmBPaYmw53_ySGZOwo8aPG");'></div>
+                            <span class="text-xs text-slate-900 dark:text-white font-medium">Sarah</span>
+                        </div>
+                         <div class="flex flex-col items-center gap-1 min-w-[60px]">
+                            <div class="size-12 rounded-full bg-cover bg-center cursor-pointer hover:ring-2 hover:ring-primary transition-all" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYIVSGiuBxC4wYMVUXqM0ZWZiqZE9SWG-SV1w05HivEtPWovUMSCOnD-gN6ZxfJfV1DCO2lIBp7K8e5REOefLaMtb6cxRSo-Ee5XfxSr4pGfFxWbsnEflgC86-i27WmgLEdNRHqfyfepFsd013-KRXnVntK1P7ydmINf1K4kafMUGLEIJgF6FUI6xn2RY2tsQhCCS4uGu3NQ4abW5Nfd3QsBcUFiXgnynuXi9eUoT7qugzqzTxrrEb8Jch5Lu2qxt_E5rt_r4j3yp0");'></div>
+                            <span class="text-xs text-slate-900 dark:text-white font-medium">Mike</span>
+                        </div>
+                    </div>
+                     <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-900 dark:text-white">$</span>
+                        <input class="w-full pl-7 pr-4 py-2 bg-slate-100 dark:bg-[#111722] rounded-lg text-slate-900 dark:text-white border-none focus:ring-2 focus:ring-primary font-bold" placeholder="0.00" type="number"/>
+                        <button class="absolute right-1 top-1 bottom-1 px-3 bg-primary text-white text-xs font-bold rounded hover:bg-primary/90">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="mt-12 py-6 text-center text-sm text-slate-500 dark:text-[#92a4c9]">
+            <p>© 2023 Demo Bank. All rights reserved.</p>
+        </footer>
+    </div>
+</div>
+{% endblock %}
